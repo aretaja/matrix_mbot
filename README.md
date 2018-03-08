@@ -1,5 +1,5 @@
 # matrix_mbot
-matrix.org bot based on Net::Async::Matrix (Perl)
+Extendible matrix.org bot based on Net::Async::Matrix (Perl)
 
 ## Getting Started
 Installation on Debian
@@ -48,13 +48,13 @@ sudo systemctl start mbot
 
 ## Usage
 Installed bot has only 2 plugins (Pong and Decide).
-Plugins are realised using Module::Pluggable. You can extend bot functionality by writing new plugins and installing them into matrix_mbot/lib/Mbot/Plugins directory.
+Plugins are realised using Module::Pluggable. You can extend bot functionality by writing new plugins and installing them into **matrix_mbot/lib/Mbot/Plugins** directory.
 
 ## Example chat
-To interact with bot one must preffix message with <bot_displayname>:
+To interact with bot one must preffix message with **<bot_displayname>:**
 ```
 (12:05:09) Me: Mbot: ping
 (12:05:13) Mbot: P O N G
-(14:33:26) Marko: Mbot: decide one or two or three
-(14:33:28) Me: one
+(14:33:26) Me: Mbot: decide one or two or three
+(14:33:28) Mbot: one
 ```
