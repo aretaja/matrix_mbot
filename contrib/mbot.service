@@ -2,7 +2,6 @@
 Description=mbot
 
 [Service]
-Type=forking
 User=mbot
 Group=nogroup
 ExecStart=/usr/local/bin/mbot.pl /usr/local/etc/mbot.conf

@@ -47,18 +47,6 @@ daemonize();
 ############# SUBROUTINES #############
 sub daemonize
 {
-    _fork() && return ();
-    POSIX::setsid();
-    _fork() && exit;
-    umask 0;
-    unless (chdir('/'))
-    {
-        _writelog("[ERROR] Can't chdir to /: $!", $e_log);
-    }
-    open STDIN,  '<',  '/dev/null';
-    open STDOUT, '>',  '/dev/null';
-    open STDERR, '>>', $e_log;
-
     while (1)
     {
         # prevent die on error
@@ -72,17 +60,6 @@ sub daemonize
         };
         sleep 30;
     }
-}
-
-sub _fork
-{
-    my $fpid = fork();
-    unless (defined($fpid))
-    {
-        _writelog("[ERROR] Can't fork: $!", $e_log);
-        exit;
-    }
-    return $fpid;
 }
 
 sub _loadconf
