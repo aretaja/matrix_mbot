@@ -1,5 +1,5 @@
 # matrix_mbot
-Extendible matrix.org bot based on Net::Async::Matrix (Perl)
+Extensible matrix.org bot based on Net::Async::Matrix (Perl)
 
 ## Getting Started
 Installation on Debian
