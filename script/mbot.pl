@@ -116,6 +116,7 @@ sub _mbot
                         my $in    = {
                             msg   => $msg,
                             dname => $ruser,
+                            conf  => \%conf,
                         };
 
                         _writelog("[INFO] $ruser: message $msg", $log);
@@ -124,7 +125,7 @@ sub _mbot
                         # prevent die on error
                         try
                         {
-                            my $mbot = Mbot->new(in => $in, conf => \%conf);
+                            my $mbot = Mbot->new(in => $in);
                             $mbot->process();
                             if ($mbot->out)
                             {

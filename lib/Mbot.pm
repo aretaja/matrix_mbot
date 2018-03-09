@@ -7,7 +7,6 @@ our $VERSION = '0.2';
 
 has 'in' => (is => 'ro', isa => 'HashRef', required => 1);
 has 'out' => (is => 'rw', isa => 'Str');
-has 'conf' => (is => 'ro', isa => 'HashRef', required => 1);
 
 =head1 NAME
 
