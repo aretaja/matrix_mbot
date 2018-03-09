@@ -18,7 +18,14 @@ Mbot - Matrix Bot message parser
 
 Takes message string and returns answer string.
 
-    $message->process;
+    $in = {
+        msg   => $msg,
+        dname => $ruser,
+        conf  => \%conf,
+    };
+    $mbot = Mbot->new(in => $in);
+    $mbot->process();
+    result = $mbot->out;
 
 =cut
 
@@ -26,15 +33,20 @@ sub process
 {
     my $self = shift;
 
+    my @out;
     foreach my $plugin ($self->plugins)
     {
         next unless $plugin->can('parse');
         my $result = $plugin->parse($self->in);
         if ($result)
         {
-            $self->out($result);
+            push(@out, $result);
         }
     }
+
+    unshift(@out, '') if (@out && scalar(@out) > 1);
+
+    $self->out(join("\n", @out)) if (@out);
 }
 
 1;

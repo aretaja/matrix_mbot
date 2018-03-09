@@ -4,7 +4,7 @@ name 'Mbot';
 
 abstract 'matrix.org bot';
 author 'Marko Punnar <marko@aretaja.org>';
-version '1.1';
+version '1.2';
 license 'gpl';
 all_from 'lib/Mbot.pm';
 

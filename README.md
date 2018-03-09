@@ -50,6 +50,14 @@ sudo systemctl start mbot
 Installed bot has only 2 plugins (Pong and Decide).
 Plugins are realised using Module::Pluggable. You can extend bot functionality by writing new plugins and installing them into **matrix_mbot/lib/Mbot/Plugins** directory.
 
+## Help
+If plugin contains response to **help** message then this text will be added to dynamic help response.
+```
+(14:22:04) Me: Mbot: help
+(14:22:10) Mbot:
+decide <part1> or <part2> or .. - returns random part
+pong - responds "PONG"
+```
 ## Example chat
 To interact with bot one must preffix message with **<bot_displayname>:**
 ```

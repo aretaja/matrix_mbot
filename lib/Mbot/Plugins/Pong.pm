@@ -1,6 +1,6 @@
 package Mbot::Plugins::Pong;
 
-our $VERSION = '0.1';
+our $VERSION = '0.2';
 
 =head1 NAME
 
@@ -20,7 +20,8 @@ sub parse
 {
     my ($self, $in) = @_;
 
-    return 'P O N G' if ($in->{msg} && $in->{msg} eq 'ping');
+    return 'pong - responds "PONG"' if ($in->{msg} && $in->{msg} eq 'help');
+    return 'P O N G'                if ($in->{msg} && $in->{msg} eq 'ping');
 }
 
 1;

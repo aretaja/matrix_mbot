@@ -1,7 +1,7 @@
 package Mbot::Plugins::Decide;
 use List::Util 'shuffle';
 
-our $VERSION = '0.1';
+our $VERSION = '0.2';
 
 =head1 NAME
 
@@ -20,6 +20,9 @@ If input is "decide <part1> or <part2> or .." responds with random part
 sub parse
 {
     my ($self, $in) = @_;
+
+    return 'decide <part1> or <part2> or .. - responds random <part?>'
+      if ($in->{msg} && $in->{msg} eq 'help');
 
     my (@parts);
     if ($in->{msg} && $in->{msg} =~ m/^decide\s+(.*)/)
