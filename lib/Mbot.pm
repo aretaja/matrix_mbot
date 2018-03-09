@@ -3,10 +3,11 @@ package Mbot;
 use Module::Pluggable search_path => 'Mbot::Plugins', require => 1;
 use Moose;
 
-our $VERSION = '0.1';
+our $VERSION = '0.2';
 
-has 'in'  => (is => 'ro', isa => 'HashRef', required => 1);
+has 'in' => (is => 'ro', isa => 'HashRef', required => 1);
 has 'out' => (is => 'rw', isa => 'Str');
+has 'conf' => (is => 'ro', isa => 'HashRef', required => 1);
 
 =head1 NAME
 

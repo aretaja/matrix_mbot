@@ -2,7 +2,7 @@
 #
 # mbot.pl
 # Copyright 2018 by Marko Punnar <marko[AT]aretaja.org>
-# Version: 1.0
+# Version: 1.1
 # Matrix bot daemon.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -20,6 +20,7 @@
 #
 # Changelog:
 # 1.0 Initial release.
+# 1.1 Add configuration values to Mbot object.
 
 use strict;
 use warnings;
@@ -123,7 +124,7 @@ sub _mbot
                         # prevent die on error
                         try
                         {
-                            my $mbot = Mbot->new(in => $in,);
+                            my $mbot = Mbot->new(in => $in, conf => \%conf);
                             $mbot->process();
                             if ($mbot->out)
                             {
