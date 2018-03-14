@@ -137,7 +137,7 @@ sub _mbot
                             }
                             else
                             {
-                                $out = "Confused. Try \"$name help\"";
+                                my $out = "Confused. Try \"$name help\"";
                                 $room->typing_stop;
                                 $room->send_message($out)->get;
                                 _writelog("[WARNING] $name: message $out", $log);
