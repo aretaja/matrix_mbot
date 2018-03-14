@@ -2,7 +2,7 @@
 #
 # mbot.pl
 # Copyright 2018 by Marko Punnar <marko[AT]aretaja.org>
-# Version: 1.1
+# Version: 1.2
 # Matrix bot daemon.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,8 @@
 #
 # Changelog:
 # 1.0 Initial release.
-# 1.1 Add configuration values to Mbot object.
+# 1.1 Add configuration values to Mbot in attribute.
+# 1.2 Return "confused" on unrecognized input.
 
 use strict;
 use warnings;
@@ -136,7 +137,10 @@ sub _mbot
                             }
                             else
                             {
-                                _writelog("[ERROR] Mbot confused", $e_log);
+                                $out = "Confused. Try \"$name help\"";
+                                $room->typing_stop;
+                                $room->send_message($out)->get;
+                                _writelog("[WARNING] $name: message $out", $log);
                             }
                         }
                         catch
