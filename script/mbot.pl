@@ -2,7 +2,7 @@
 #
 # mbot.pl
 # Copyright 2018 by Marko Punnar <marko[AT]aretaja.org>
-# Version: 1.2
+# Version: 1.3
 # Matrix bot daemon.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -22,6 +22,7 @@
 # 1.0 Initial release.
 # 1.1 Add configuration values to Mbot in attribute.
 # 1.2 Return "confused" on unrecognized input.
+# 1.3 Don't restrict room names to connected server only.
 
 use strict;
 use warnings;
@@ -167,7 +168,7 @@ sub _mbot
     foreach (@$rooms)
     {
         _writelog("[INFO] Joining $_", $log);
-        $matrix->join_room("$_:$server")->get;
+        $matrix->join_room("$_")->get;
         _writelog("[INFO] $name is live on $_", $log);
     }
 
