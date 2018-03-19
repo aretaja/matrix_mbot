@@ -2,7 +2,7 @@
 #
 # mbot.pl
 # Copyright 2018 by Marko Punnar <marko[AT]aretaja.org>
-# Version: 1.3
+# Version: 1.4
 # Matrix bot daemon.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -23,6 +23,7 @@
 # 1.1 Add configuration values to Mbot in attribute.
 # 1.2 Return "confused" on unrecognized input.
 # 1.3 Don't restrict room names to connected server only.
+# 1.4 Make homeserver port configurable.
 
 use strict;
 use warnings;
@@ -39,7 +40,8 @@ use Data::Dumper;
 
 # Load config params
 my $cfile = $ARGV[0] || '/usr/local/etc/mbot.conf';
-my (%conf, $server, $user, $pass, $name, $time_zone, $log, $e_log, $rooms);
+my (%conf, $server, $port, $user, $pass, $name, $time_zone, $log, $e_log,
+    $rooms);
 
 # Load config params from file
 _loadconf();
@@ -81,6 +83,7 @@ sub _loadconf
     }
 
     $server = $conf{server} || die('server not defined in config file');
+    $port   = $conf{port}   || 443;
     $user   = $conf{user}   || die('user not defined in config file');
     $pass   = $conf{pass}   || die('pass not defined in config file');
     $name   = $conf{name}   || die('name not defined in config file');
@@ -97,7 +100,7 @@ sub _mbot
     _writelog("[INFO] Mbot initializing", $log);
     my $loop   = IO::Async::Loop->new;
     my $matrix = Net::Async::Matrix->new(
-        server           => $server,
+        server           => "$server:$port",
         SSL              => 1,
         first_sync_limit => 0,
 
@@ -141,7 +144,8 @@ sub _mbot
                                 my $out = "Confused. Try \"$name: help\"";
                                 $room->typing_stop;
                                 $room->send_message($out)->get;
-                                _writelog("[WARNING] $name: message $out", $log);
+                                _writelog("[WARNING] $name: message $out",
+                                    $log);
                             }
                         }
                         catch
@@ -156,7 +160,7 @@ sub _mbot
 
     $loop->add($matrix);
 
-    _writelog("[INFO] Logging in to $server as $user", $log);
+    _writelog("[INFO] Logging in to $server:$port as $user", $log);
     $matrix->login(
         user_id  => "\@$user:$server",
         password => $pass,
