@@ -2,7 +2,7 @@
 #
 # mbot.pl
 # Copyright 2018 by Marko Punnar <marko[AT]aretaja.org>
-# Version: 1.5
+# Version: 1.6
 # Matrix bot daemon.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -25,16 +25,15 @@
 # 1.3 Don't restrict room names to connected server only.
 # 1.4 Make homeserver port configurable.
 # 1.5 Removed superfluous try block.
+# 1.6 Let systemd do the daemonize work.
 
 use strict;
 use warnings;
 
 use Net::Async::Matrix;
 use IO::Async::Loop;
-use Try::Tiny;
 use Config::General;
 use DateTime;
-use POSIX;
 use Mbot;
 
 use Data::Dumper;
@@ -47,27 +46,10 @@ my (%conf, $server, $port, $user, $pass, $name, $time_zone, $log, $e_log,
 # Load config params from file
 _loadconf();
 
-# Run daemon
-daemonize();
+# Run matrix-mbot
+_mbot();
 
 ############# SUBROUTINES #############
-sub daemonize
-{
-    while (1)
-    {
-        # prevent die on error
-        try
-        {
-            _mbot();
-        }
-        catch
-        {
-            _writelog("[ERROR] _mbot died -  $_", $e_log);
-        };
-        sleep 30;
-    }
-}
-
 sub _loadconf
 {
     if (-f $cfile && -r $cfile)
@@ -126,13 +108,11 @@ sub _mbot
                         };
 
                         _writelog("[INFO] $ruser: message $msg", $log);
-                        $room->typing_start;
 
                         my $mbot = Mbot->new(in => $in);
                         $mbot->process();
                         if ($mbot->out)
                         {
-                            $room->typing_stop;
                             $room->send_message($mbot->out)->get;
                             _writelog("[INFO] $name: message " . $mbot->out,
                                 $log);
@@ -140,7 +120,6 @@ sub _mbot
                         else
                         {
                             my $out = "Confused. Try \"$name: help\"";
-                            $room->typing_stop;
                             $room->send_message($out)->get;
                             _writelog("[WARNING] $name: message $out", $log);
                         }
