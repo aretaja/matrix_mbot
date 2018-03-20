@@ -2,7 +2,7 @@
 #
 # mbot.pl
 # Copyright 2018 by Marko Punnar <marko[AT]aretaja.org>
-# Version: 1.4
+# Version: 1.5
 # Matrix bot daemon.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -24,6 +24,7 @@
 # 1.2 Return "confused" on unrecognized input.
 # 1.3 Don't restrict room names to connected server only.
 # 1.4 Make homeserver port configurable.
+# 1.5 Removed superfluous try block.
 
 use strict;
 use warnings;
@@ -127,31 +128,22 @@ sub _mbot
                         _writelog("[INFO] $ruser: message $msg", $log);
                         $room->typing_start;
 
-                        # prevent die on error
-                        try
+                        my $mbot = Mbot->new(in => $in);
+                        $mbot->process();
+                        if ($mbot->out)
                         {
-                            my $mbot = Mbot->new(in => $in);
-                            $mbot->process();
-                            if ($mbot->out)
-                            {
-                                $room->typing_stop;
-                                $room->send_message($mbot->out)->get;
-                                _writelog("[INFO] $name: message " . $mbot->out,
-                                    $log);
-                            }
-                            else
-                            {
-                                my $out = "Confused. Try \"$name: help\"";
-                                $room->typing_stop;
-                                $room->send_message($out)->get;
-                                _writelog("[WARNING] $name: message $out",
-                                    $log);
-                            }
+                            $room->typing_stop;
+                            $room->send_message($mbot->out)->get;
+                            _writelog("[INFO] $name: message " . $mbot->out,
+                                $log);
                         }
-                        catch
+                        else
                         {
-                            _writelog("[ERROR] Mbot code died - $_", $e_log);
-                        };
+                            my $out = "Confused. Try \"$name: help\"";
+                            $room->typing_stop;
+                            $room->send_message($out)->get;
+                            _writelog("[WARNING] $name: message $out", $log);
+                        }
                     }
                 },
             );
