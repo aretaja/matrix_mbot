@@ -1,6 +1,6 @@
 package Mbot::Plugins::Country;
 
-our $VERSION = '0.1';
+our $VERSION = '0.2';
 
 =head1 NAME
 
@@ -108,7 +108,7 @@ sub parse
             'FM'   => 'Micronesia',
             'FO'   => 'Faroe Islands',
             'FR'   => 'France',
-            'FX'   => 'France' => 'Metropolitan',
+            'FX'   => 'France Metropolitan',
             'GA'   => 'Gabon',
             'GB'   => 'Great Britain',
             'GD'   => 'Grenada',
