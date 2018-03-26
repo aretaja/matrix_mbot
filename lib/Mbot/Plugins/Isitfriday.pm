@@ -10,7 +10,7 @@ Mbot::Plugins::Isitfriday - Simple Mbot friday check plugin
 
 =head2 parse - input parser
 
-If input is "isitfriday" responds with useful phrase
+Responds useful phrase.
 
        $result = parse($self->in);
 

@@ -11,7 +11,7 @@ Mbot::Plugins::Decide - Simple Mbot decision plugin
 
 =head2 parse - input parser
 
-If input is "decide <part1> or <part2> or .." responds with random part
+Responds random from submitted parts.
 
        $result = parse($self->in);
 

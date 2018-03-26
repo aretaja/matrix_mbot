@@ -10,7 +10,7 @@ Mbot::Plugins::Pong - Simple Mbot echo plugin
 
 =head2 parse - input parser
 
-If input is "ping" responds with "P O N G"
+Responds "P O N G"
 
        $result = parse($self->in);
 

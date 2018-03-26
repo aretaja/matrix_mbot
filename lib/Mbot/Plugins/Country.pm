@@ -10,7 +10,7 @@ Mbot::Plugins::Country - Mbot TLD country plugin
 
 =head2 parse - input parser
 
-If input is "country <DOMAIN>" responds TLD country name. (fe. country EE)
+Responds TLD country name. (fe. country EE)
 
        $result = parse($self->in);
 
