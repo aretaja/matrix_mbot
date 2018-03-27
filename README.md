@@ -13,7 +13,7 @@ Test::Async::HTTP
 
 * From debian repo
 ```
-apt install libhttp-message-perl libio-async-perl libfuture-perl libstruct-dumb-perl liburi-perl libtest-identity-perl libhttp-cookies-perl libtest-refcount-perl libtry-tiny-perl libconfig-general-perl libdatetime-perl libmoose-perl libmodule-pluggable-perl
+apt install libhttp-message-perl libio-async-perl libfuture-perl libstruct-dumb-perl liburi-perl libtest-identity-perl libhttp-cookies-perl libtest-refcount-perl libtry-tiny-perl libconfig-general-perl libdatetime-perl libmoose-perl libmodule-pluggable-perl libjson-perl libwww-perl
 ```
 ## Installing
 ```
