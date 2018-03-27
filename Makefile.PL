@@ -4,7 +4,7 @@ name 'Mbot';
 
 abstract 'matrix.org bot';
 author 'Marko Punnar <marko@aretaja.org>';
-version '1.3';
+version '1.4';
 license 'gpl';
 all_from 'lib/Mbot.pm';
 
@@ -14,6 +14,8 @@ requires 'IO::Async::Loop';               # no package
 requires 'Config::General';               # libconfig-general-perl
 requires 'DateTime';                      # libdatetime-perl
 requires 'Moose';                         # libmoose-perl
+requires 'LWP::UserAgent';                # libwww-perl
+requires 'JSON';                          # libjson-perl
 requires 'Module::Pluggable';             # libmodule-pluggable-perl
 
 install_script glob('script/*.pl');
