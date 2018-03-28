@@ -2,7 +2,7 @@ package Mbot::Plugins::Ripe;
 use LWP::UserAgent;
 use JSON;
 
-our $VERSION = '0.2';
+our $VERSION = '0.3';
 
 =head1 NAME
 
@@ -147,7 +147,7 @@ sub parse
                 @out = ('');
                 push(@out, "* forward:\n" . join("\n", @{$info->{forward}}));
                 push(@out, "* reverse:\n" . join("\n", @{$info->{ptr}}));
-                push(@out, "* authoritative ns:\n    $info->{authns})");
+                push(@out, "* authoritative ns:\n    $info->{authns}");
                 return join("\n", @out);
             }
 
