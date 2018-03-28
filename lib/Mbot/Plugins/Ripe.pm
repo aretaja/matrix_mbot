@@ -52,7 +52,7 @@ sub parse
             my $result = _get_data('geoloc', {resource => $1});
             if ($result->{data}->{locations})
             {
-                push(@out, "$1:");
+                @out = ('', "$1:");
                 foreach my $l (@{$result->{data}->{locations}})
                 {
                     my $loc = _fix_utf8_enc("$l->{country} $l->{city}");
@@ -69,7 +69,7 @@ sub parse
             my $result = _get_data('reverse-dns', {resource => $1});
             if ($result->{data}->{delegations})
             {
-                push(@out, "$1:");
+                @out = ('', "$1:");
                 foreach my $d (@{$result->{data}->{delegations}})
                 {
                     my $info = {
