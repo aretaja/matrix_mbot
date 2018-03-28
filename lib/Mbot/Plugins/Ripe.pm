@@ -2,7 +2,7 @@ package Mbot::Plugins::Ripe;
 use LWP::UserAgent;
 use JSON;
 
-our $VERSION = '0.4';
+our $VERSION = '0.5';
 
 =head1 NAME
 
@@ -56,7 +56,7 @@ sub parse
                 @out = ('', "$1:");
                 foreach my $l (@{$result->{data}->{locations}})
                 {
-                    my $loc = _fix_utf8_enc("$l->{country} $l->{city}");
+                    my $loc = "$l->{country} $l->{city}";
                     my $map =
 "https://maps.google.com/?q=$l->{latitude},$l->{longitude}";
                     my $pref = join(', ', @{$l->{prefixes}});
@@ -185,17 +185,6 @@ sub _get_data
     }
 
     return $data;
-}
-
-sub _fix_utf8_enc
-{
-    my $in = shift || return;
-
-    my $out = $in;
-    eval { Encode::decode("UTF-8", $in, Encode::FB_CROAK) };
-    $out = encode_utf8($in) if ($@);
-
-    return $out;
 }
 
 __END__
