@@ -27,7 +27,7 @@ sub parse
         my @out = (
             'ripe <command> [arg]',
             '  command:',
-            '    asholder <as nr> - responds AS holder. (fe. asdata AS1257)',
+            '    asholder <as nr> - responds AS holder. (fe. asholder AS1257)',
             '    geoloc <pref|range|asn|fqn> - responds geolocation info',
             '    dnsrevdel <ip|pref> - responds DNS reverse delegation info',
             '    dnsinfo <ip|fqn> - responds A/AAAA/CNAME/PTR and auth. ns',
