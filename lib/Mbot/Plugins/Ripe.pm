@@ -38,6 +38,7 @@ sub parse
     if ($in->{msg} && $in->{msg} =~ m/^ripe\s+(.*)/)
     {
         my $cmd = $1;
+        my @out;
         if ($cmd =~ m/^asholder\s(AS\d+)/)
         {
             my $result = _get_data('as-overview', {resource => $1});
