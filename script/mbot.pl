@@ -87,6 +87,11 @@ sub _mbot
         SSL              => 1,
         first_sync_limit => 0,
 
+        on_error => sub {
+            my ( undef, $message ) = @_;
+            _writelog("[ERROR] matrix failure - $message", $e_log);
+        },
+
         on_room_new => sub {
             my (undef, $room) = @_;
 
