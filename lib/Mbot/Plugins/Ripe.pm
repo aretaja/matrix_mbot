@@ -2,7 +2,7 @@ package Mbot::Plugins::Ripe;
 use LWP::UserAgent;
 use JSON;
 
-our $VERSION = '0.3';
+our $VERSION = '0.4';
 
 =head1 NAME
 
@@ -39,7 +39,7 @@ sub parse
     {
         my $cmd = $1;
         my @out;
-        if ($cmd =~ m/^asholder\s(AS\d+)/)
+        if ($cmd =~ m/^asholder\s+(AS\d+)/)
         {
             my $result = _get_data('as-overview', {resource => $1});
             if ($result->{data}->{holder})
@@ -48,7 +48,7 @@ sub parse
                 return join("\n", @out);
             }
         }
-        elsif ($cmd =~ m/^geoloc\s([\w\/\-\.]+)/)
+        elsif ($cmd =~ m/^geoloc\s+([\w\/\-\.]+)/)
         {
             my $result = _get_data('geoloc', {resource => $1});
             if ($result->{data}->{locations})
@@ -65,7 +65,7 @@ sub parse
                 return join("\n", @out);
             }
         }
-        elsif ($cmd =~ m/^dnsrevdel\s([\d\.\:\/]+)/)
+        elsif ($cmd =~ m/^dnsrevdel\s+([\d\.\:\/]+)/)
         {
             my $result = _get_data('reverse-dns', {resource => $1});
             if ($result->{data}->{delegations})
@@ -95,7 +95,7 @@ sub parse
                 return join("\n", @out);
             }
         }
-        elsif ($cmd =~ m/^dnsinfo\s([\w\.\:]+)/)
+        elsif ($cmd =~ m/^dnsinfo\s+([\w\.\:\-]+)/)
         {
             my $result = _get_data('dns-chain', {resource => $1});
             my $info;
@@ -139,7 +139,7 @@ sub parse
             }
             else
             {
-                push(@{$info->{authns}}, "    Na");
+                $info->{authns} = "Na";
             }
 
             if ($info)
