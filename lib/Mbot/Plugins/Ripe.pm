@@ -134,7 +134,7 @@ sub parse
             if ($result->{data}->{authoritative_nameservers})
             {
                 $info->{authns} = join("\n    ",
-                    @{$result->{data}->{authoritative_nameservers}};
+                    @{$result->{data}->{authoritative_nameservers}});
             }
             else
             {
