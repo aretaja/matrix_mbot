@@ -4,7 +4,7 @@ name 'Mbot';
 
 abstract 'matrix.org bot';
 author 'Marko Punnar <marko@aretaja.org>';
-version '1.6';
+version '1.7';
 license 'gpl';
 all_from 'lib/Mbot.pm';
 
@@ -17,8 +17,8 @@ requires 'Moose';                 # libmoose-perl
 requires 'LWP::UserAgent';        # libwww-perl
 requires 'JSON';                  # libjson-perl
 requires 'Module::Pluggable';     # libmodule-pluggable-perl
-requires 'Test::Most';            # libtest-most-perl
-requires 'Test::Compile';         # libtest-compile-perl
+test_requires 'Test::Most';       # libtest-most-perl
+test_requires 'Test::Compile';    # libtest-compile-perl
 
 install_script glob('script/*.pl');
 auto_install;

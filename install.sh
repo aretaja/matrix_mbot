@@ -2,7 +2,7 @@
 
 perl Makefile.PL && \
 make && \
-make test && \
+make test TEST_VERBOSE=1 && \
 sudo make install && \
 make clean && \
 echo Restart mbot service
