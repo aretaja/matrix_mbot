@@ -1,7 +1,10 @@
 package Mbot::Plugins::Decide;
+use strict;
+use warnings;
+
 use List::Util 'shuffle';
 
-our $VERSION = '0.2';
+our $VERSION = '0.3';
 
 =head1 NAME
 
@@ -30,7 +33,7 @@ sub parse
         @parts = split(/\s+or\s+/, $1) if ($1);
         if (@parts)
         {
-            @shuffled = shuffle(@parts);
+            my @shuffled = shuffle(@parts);
             return $shuffled[0];
         }
     }

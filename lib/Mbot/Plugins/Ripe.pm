@@ -1,8 +1,11 @@
 package Mbot::Plugins::Ripe;
+use strict;
+use warnings;
+
 use LWP::UserAgent;
 use JSON;
 
-our $VERSION = '0.5';
+our $VERSION = '0.6';
 
 =head1 NAME
 
