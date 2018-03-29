@@ -13,14 +13,20 @@ Test::Async::HTTP
 
 * From debian repo
 ```
-apt install libhttp-message-perl libio-async-perl libfuture-perl libstruct-dumb-perl liburi-perl libtest-identity-perl libhttp-cookies-perl libtest-refcount-perl libtry-tiny-perl libconfig-general-perl libdatetime-perl libmoose-perl libmodule-pluggable-perl libjson-perl libwww-perl
+apt install libhttp-message-perl libio-async-perl libfuture-perl \
+            libstruct-dumb-perl liburi-perl libtest-identity-perl \
+            libhttp-cookies-perl libtest-refcount-perl libtry-tiny-perl \
+            libconfig-general-perl libdatetime-perl libmoose-perl \
+            libmodule-pluggable-perl libjson-perl libwww-perl \
+            libtest-most-perl libtest-compile-perl
 ```
 
 ## Installing
 
 ### Add system user
 ```
-sudo adduser --system --home /nonexistent --no-create-home --disabled-password --disabled-login mbot
+sudo adduser --system --home /nonexistent --no-create-home \
+             --disabled-password --disabled-login mbot
 ```
 
 ### Make log directory
